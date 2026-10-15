@@ -1,0 +1,74 @@
+{
+  "expo": {
+    "name": "Peekaboo",
+    "slug": "peekaboo",
+    "version": "1.0.0",
+    "scheme": "peekaboo",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F3EEE3",
+    "ios": {
+      "bundleIdentifier": "com.shaeffer.peekaboo",
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.shaeffer.peekaboo",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#F2DF93",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.CAMERA"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#F2DF93"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Peekaboo uses the camera to take the photo you are about to send.",
+          "recordAudioAndroid": false,
+          "barcodeScannerEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#F2DF93"
+        }
+      ]
+    ],
+    "primaryColor": "#F2DF93",
+    "owner": "nshaeffer05",
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e3b4f142-9c17-4c14-92cd-a64b63765750"
+      }
+    }
+  }
+}

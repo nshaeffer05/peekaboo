@@ -1,0 +1,23 @@
+{
+  "cli": { "version": ">= 5.0.0", "appVersionSource": "local" },
+  "build": {
+    "development": { "developmentClient": true, "distribution": "internal" },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://yvelonsocenhyvwtmryi.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_g31glmIFzkvfjnEoy2SwBw_v1G_K-ms"
+      },
+      "channel": "preview"
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://yvelonsocenhyvwtmryi.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_g31glmIFzkvfjnEoy2SwBw_v1G_K-ms"
+      },
+      "channel": "production"
+    }
+  },
+  "submit": { "production": {} }
+}

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Add me on Peekaboo</title>
+<style>body{font-family:-apple-system,system-ui,sans-serif;max-width:680px;margin:40px auto;padding:0 20px;line-height:1.55;color:#3A3A38;background:#F3EEE3}h1{letter-spacing:-.5px}a{color:#5F84AD} body{text-align:center}.u{font-size:28px;font-weight:800;margin:16px 0}.b{display:inline-block;background:#F2DF93;color:#3A3A38;font-weight:800;padding:14px 24px;border-radius:999px;text-decoration:none}</style></head>
+<body>
+<h1>Peekaboo</h1>
+<p>Someone wants to be your friend on Peekaboo.</p>
+<p class="u" id="u"></p>
+<p><a class="b" id="open" href="#">Open in Peekaboo</a></p>
+<p>Don't have the app yet? Install Peekaboo, then open Profile → Friends and search this username.</p>
+<script>
+var u=(new URLSearchParams(location.search).get('u')||'').toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,20);
+document.getElementById('u').textContent=u?'@'+u:'';
+document.getElementById('open').href='peekaboo://add/'+u;
+</script>
+</body></html>
