@@ -28,8 +28,8 @@ Dashboard → Authentication → Emails → Templates → Reset password
 The app calls `verifyOtp({ type: 'recovery' })` with that code.
 
 ## 4. Legal pages live
-Create a public GitHub repo `nshaeffer05/peekaboo`, push, enable Pages from `main` with `/docs/site` as the folder
-(or push `docs/site` to a `gh-pages` branch). The app links to `https://nshaeffer05.github.io/peekaboo/`.
+Create a public GitHub repo `nshaeffer05/peekaboo`, push, enable Pages from `main` with `/docs` as the folder
+(or serve the `docs` folder). The app links to `https://nshaeffer05.github.io/peekaboo/`.
 `add.html` there is what a friend's QR code opens.
 
 ## 5. Build
