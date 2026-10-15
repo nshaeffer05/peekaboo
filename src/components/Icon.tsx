@@ -5,7 +5,7 @@ import { colors } from '../lib/theme';
 
 export type IconName =
   | 'face' | 'camera' | 'inbox' | 'people' | 'gear' | 'check' | 'x' | 'chevron'
-  | 'flip' | 'bolt' | 'boltOff' | 'send' | 'flag' | 'eye' | 'puff' | 'plus' | 'stack';
+  | 'flip' | 'bolt' | 'boltOff' | 'send' | 'flag' | 'eye' | 'puff' | 'plus' | 'stack' | 'mailbox' | 'bearHat';
 
 const GLYPHS: Record<IconName, React.ReactNode> = {
   face: (
@@ -84,6 +84,27 @@ const GLYPHS: Record<IconName, React.ReactNode> = {
     </>
   ),
   plus: <Path d="M12 5.5v13M5.5 12h13" />,
+  // A little roadside mailbox: rounded body, post, flag up.
+  mailbox: (
+    <>
+      <Path d="M3.6 11.2c0-2.7 1.9-4.7 4.4-4.7h8.2c2.5 0 4.3 2.1 4.2 4.7l-.1 5.3H3.7z" />
+      <Path d="M8 6.5c-2.4.1-4.2 2.1-4.3 4.7M12.6 16.4V11c0-2.6-1.9-4.5-4.4-4.5" />
+      <Path d="M16.8 6.5V2.8h3.4v2.7h-3.3" />
+      <Path d="M9.2 16.6v4.6M6.6 21.3h5.2" />
+    </>
+  ),
+  // Polar bear in an ushanka: fur hat with ear flaps down, round face below.
+  bearHat: (
+    <>
+      <Path d="M6.9 10.1c.4-3.6 2.4-5.7 5.1-5.7s4.7 2.1 5.1 5.7" />
+      <Path d="M5.2 10.4c2.2-1.1 11.4-1.1 13.6 0 .6.3.6 1.2-.2 1.3-2.4.5-10.8.5-13.2 0-.8-.1-.8-1-.2-1.3z" />
+      <Path d="M6 11.9c-.6 1.5-.8 2.9-.5 4.3M18 11.9c.6 1.5.8 2.9.5 4.3" />
+      <Path d="M6.6 12.3c-.4 5 2 9.2 5.4 9.2s5.8-4.2 5.4-9.2" />
+      <Path d="M9.9 15.2v.2M14.1 15.2v.2" />
+      <Path d="M12 17.3c-.9 0-1.5.4-1.5.9s.6.8 1.5.8 1.5-.3 1.5-.8-.6-.9-1.5-.9z" />
+      <Path d="M12 19v.9" />
+    </>
+  ),
   stack: (
     <>
       <Path d="M12 3.6l8.4 4.6-8.4 4.6-8.4-4.6z" />

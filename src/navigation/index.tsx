@@ -82,10 +82,10 @@ export const AppNavigator = () => {
         <Tabs.Screen
           name="Feed"
           component={FeedScreen}
-          options={{ title: 'Feed', tabBarIcon: icon('inbox'), tabBarBadge: inbox.length || undefined }}
+          options={{ title: 'Feed', tabBarIcon: icon('mailbox'), tabBarBadge: inbox.length || undefined }}
         />
         <Tabs.Screen name="Camera" component={CameraScreen} options={{ title: 'Camera', tabBarIcon: icon('camera', true) }} />
-        <Tabs.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile', tabBarIcon: icon('face'), tabBarBadge: requests || undefined }} />
+        <Tabs.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile', tabBarIcon: icon('bearHat'), tabBarBadge: requests || undefined }} />
       </Tabs.Navigator>
     </NavigationContainer>
   );
