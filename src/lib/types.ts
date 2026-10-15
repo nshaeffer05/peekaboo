@@ -31,6 +31,8 @@ export interface InboxSnap {
   image_path: string;
   created_at: string;
   expires_at: string;
+  caption: string | null;
+  caption_y: number;
 }
 
 /** A photo I sent, kept (without the file) for a day so I can see if it was opened. */

@@ -82,8 +82,8 @@ export const api = {
   },
 
   // ---- snaps
-  async sendSnap(path: string, recipients: string[]): Promise<number> {
-    const { data, error } = await supabase.rpc('send_snap', { path, recipients });
+  async sendSnap(path: string, recipients: string[], caption: string | null, captionY: number): Promise<number> {
+    const { data, error } = await supabase.rpc('send_snap', { path, recipients, caption, caption_y: captionY });
     fail(error);
     return (data as number) ?? 0;
   },

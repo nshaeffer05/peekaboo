@@ -3,6 +3,7 @@ import { usePreventScreenCapture } from 'expo-screen-capture';
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, Animated, Easing, Modal, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CaptionBar } from '../components/Caption';
 import { Icon } from '../components/Icon';
 import { Button, Small } from '../components/ui';
 import { api } from '../lib/api';
@@ -127,6 +128,7 @@ export const SnapViewer = ({ snap, origin, onDone }: { snap: InboxSnap; origin: 
           </View>
         )}
         {src && <Pressable style={StyleSheet.absoluteFill} onPress={close} />}
+        {src && snap.caption ? <CaptionBar text={snap.caption} y={snap.caption_y * H} /> : null}
 
         <Animated.View style={[styles.top, { top: insets.top + 8, opacity: chrome }]}>
           <View style={styles.who}><Text style={styles.whoText}>@{snap.sender}</Text></View>
