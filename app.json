@@ -63,12 +63,15 @@
     "primaryColor": "#F2DF93",
     "owner": "nshaeffer05",
     "runtimeVersion": {
-      "policy": "fingerprint"
+      "policy": "appVersion"
     },
     "extra": {
       "eas": {
         "projectId": "e3b4f142-9c17-4c14-92cd-a64b63765750"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e3b4f142-9c17-4c14-92cd-a64b63765750"
     }
   }
 }
