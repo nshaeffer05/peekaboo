@@ -97,7 +97,7 @@ export const AuthScreen = () => {
           <Field
             placeholder={mode === 'up' ? 'password (8+, a letter and a number)' : 'password'}
             secureTextEntry
-            textContentType={mode === 'up' ? 'newPassword' : 'password'}
+            textContentType="password"
             value={password}
             onChangeText={setPassword}
             onSubmitEditing={submit}

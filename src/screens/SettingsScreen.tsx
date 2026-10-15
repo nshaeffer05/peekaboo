@@ -55,7 +55,7 @@ export const SettingsScreen = () => {
 
         <Card style={{ gap: 8 }}>
           <Body style={{ fontWeight: '800' }}>Change password</Body>
-          <Field placeholder="new password" secureTextEntry textContentType="newPassword" value={newPassword} onChangeText={setNewPassword} />
+          <Field placeholder="new password" secureTextEntry textContentType="password" value={newPassword} onChangeText={setNewPassword} />
           <Button title="Save" small onPress={savePassword} loading={busy} disabled={!newPassword} />
         </Card>
 

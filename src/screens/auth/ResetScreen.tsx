@@ -57,7 +57,7 @@ export const ResetScreen = ({ onDone, initialEmail }: { onDone: () => void; init
               <Field style={styles.code} placeholder="code"
                 keyboardType="number-pad" textContentType="oneTimeCode" value={code} onChangeText={setCode} />
               <Field placeholder="new password (8+, a letter and a number)"
-                secureTextEntry textContentType="newPassword" value={password} onChangeText={setPassword} />
+                secureTextEntry textContentType="password" value={password} onChangeText={setPassword} />
               {error && <Small style={{ color: colors.crimson }}>{error}</Small>}
               <Button title="Set new password" onPress={finish} loading={busy} />
               <Button title="Send another code" variant="ghost" onPress={send} />
