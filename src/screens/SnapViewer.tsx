@@ -8,7 +8,7 @@ import { Icon } from '../components/Icon';
 import { Button, Small } from '../components/ui';
 import { api } from '../lib/api';
 import { useSnaps } from '../lib/snaps';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { InboxSnap } from '../lib/types';
 
 const SECONDS = 11;
@@ -153,7 +153,7 @@ export const SnapViewer = ({ snap, origin, onDone }: { snap: InboxSnap; origin: 
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   box: { position: 'absolute', overflow: 'hidden', backgroundColor: colors.black },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   top: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
@@ -163,4 +163,4 @@ const styles = StyleSheet.create({
   track: { position: 'absolute', left: 0, right: 0, height: 3, backgroundColor: 'rgba(255,255,255,0.25)' },
   fill: { height: 3, backgroundColor: colors.butter },
   hint: { position: 'absolute', alignSelf: 'center', color: colors.grey, fontSize: 13, fontWeight: '600' },
-});
+}));

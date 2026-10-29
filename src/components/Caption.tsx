@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, PanResponder, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Keyboard, PanResponder, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../lib/theme';
 
 /** Snapchat-style caption bar: dark translucent band, white centred text. */
@@ -19,58 +19,80 @@ interface EditorProps {
   onMove: (y: number) => void;
   height: number;
   editing: boolean;
-  onBlur: () => void;
+  onEdit: () => void;
+  onDone: () => void;
   /** While the keyboard is up the bar parks near the top so it is never hidden. */
   parkY: number;
 }
 
 /**
- * The same bar, editable. Drag it up or down when not typing; it stays where
- * you leave it, and the viewer draws it at that same relative height.
+ * The same bar, but yours to move. When you are not typing it is a plain
+ * label you can drag anywhere up or down the photo; a tap on it starts
+ * editing. While typing it parks near the top, above the keyboard, and
+ * returns to where you left it when you hit Done.
  */
-export const CaptionEditor = ({ value, onChange, y, onMove, height, editing, onBlur, parkY }: EditorProps) => {
+export const CaptionEditor = ({ value, onChange, y, onMove, height, editing, onEdit, onDone, parkY }: EditorProps) => {
   const [barH, setBarH] = useState(48);
-  // The responder is created once; it reads the latest values through refs.
-  const live = useRef({ y, height, barH, onMove });
-  useEffect(() => { live.current = { y, height, barH, onMove }; }, [y, height, barH, onMove]);
+  const [kb, setKb] = useState(0);
+  const live = useRef({ y, height, barH, onMove, onEdit });
+  useEffect(() => { live.current = { y, height, barH, onMove, onEdit }; }, [y, height, barH, onMove, onEdit]);
   const start = useRef(0);
+  const moved = useRef(false);
+
+  useEffect(() => {
+    const show = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => setKb(e.endCoordinates.height));
+    const hide = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => setKb(0));
+    return () => { show.remove(); hide.remove(); };
+  }, []);
+
   // The handlers only touch the refs when a gesture fires, never during render.
   // eslint-disable-next-line react-hooks/refs
   const [pan] = useState(() =>
     PanResponder.create({
-      onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dy) > 4,
-      onPanResponderGrant: () => { start.current = live.current.y; },
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => { start.current = live.current.y; moved.current = false; },
       onPanResponderMove: (_e, g) => {
+        if (Math.abs(g.dy) > 3) moved.current = true;
         const { height: h, barH: b, onMove: move } = live.current;
         move(Math.min(h - b, Math.max(0, start.current * h + g.dy)) / h);
       },
+      onPanResponderRelease: () => { if (!moved.current) live.current.onEdit(); },
     }),
   );
 
-  const top = editing ? parkY : Math.min(height - barH, y * height);
+  if (editing) {
+    // Keep the bar inside the visible strip above the keyboard.
+    const top = Math.min(parkY, Math.max(0, height - kb - barH - 16));
+    return (
+      <View style={[styles.bar, { top }]} onLayout={(e) => setBarH(e.nativeEvent.layout.height)}>
+        <TextInput
+          style={[styles.text, styles.input]}
+          value={value}
+          onChangeText={(t) => onChange(t.slice(0, MAX_CAPTION))}
+          autoFocus
+          multiline
+          maxLength={MAX_CAPTION}
+          placeholder="Say something"
+          placeholderTextColor="rgba(255,255,255,0.6)"
+          returnKeyType="done"
+          submitBehavior="blurAndSubmit"
+          onSubmitEditing={onDone}
+          onBlur={onDone}
+          selectionColor={colors.butter}
+        />
+      </View>
+    );
+  }
+
   return (
-    <Animated.View
-      style={[styles.bar, { top }]}
+    <Pressable
+      style={[styles.bar, { top: Math.min(height - barH, y * height) }]}
       onLayout={(e) => setBarH(e.nativeEvent.layout.height)}
-      {...(editing ? {} : pan.panHandlers)}
+      {...pan.panHandlers}
     >
-      <TextInput
-        style={[styles.text, styles.input]}
-        value={value}
-        onChangeText={(t) => onChange(t.slice(0, MAX_CAPTION))}
-        autoFocus={editing}
-        editable={editing}
-        multiline
-        maxLength={MAX_CAPTION}
-        placeholder="Say something"
-        placeholderTextColor="rgba(255,255,255,0.6)"
-        returnKeyType="done"
-        blurOnSubmit
-        onSubmitEditing={onBlur}
-        onBlur={onBlur}
-        selectionColor={colors.butter}
-      />
-    </Animated.View>
+      <Text style={styles.text}>{value}</Text>
+    </Pressable>
   );
 };
 

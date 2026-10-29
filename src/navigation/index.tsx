@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, type IconName } from '../components/Icon';
 import { SITE_URL } from '../lib/links';
 import { useSnaps } from '../lib/snaps';
-import { colors } from '../lib/theme';
+import { colors, useScheme } from '../lib/theme';
 import { CameraScreen } from '../screens/CameraScreen';
 import { FeedScreen } from '../screens/FeedScreen';
 import { FriendsScreen } from '../screens/FriendsScreen';
@@ -20,8 +20,9 @@ import type { ProfileStackParams, TabParams } from './types';
 const Stack = createNativeStackNavigator<ProfileStackParams>();
 const Tabs = createBottomTabNavigator<TabParams>();
 
-const ProfileStack = () => (
+const ProfileStack = ({ startOnSettings = false }: { startOnSettings?: boolean }) => (
   <Stack.Navigator
+    initialRouteName={startOnSettings ? 'Settings' : 'Profile'}
     screenOptions={{
       headerShadowVisible: false,
       headerStyle: { backgroundColor: colors.paper },
@@ -40,10 +41,16 @@ const ProfileStack = () => (
   </Stack.Navigator>
 );
 
-const theme = {
+const navTheme = () => ({
   ...DefaultTheme,
-  colors: { ...DefaultTheme.colors, background: colors.paper, card: colors.paper, text: colors.ink, primary: colors.blueJean },
-};
+  dark: colors.dark,
+  colors: { ...DefaultTheme.colors, background: colors.paper, card: colors.paper, text: colors.ink, primary: colors.blueJean, border: colors.line },
+});
+
+/** Set before the tree remounts (a scheme change) so the user lands back where they were. */
+let resumeOnSettings = false;
+export const remountOnSettings = () => { resumeOnSettings = true; };
+const takeResume = () => { const r = resumeOnSettings; resumeOnSettings = false; return r; };
 
 /** peekaboo://add/<name> and the web add page both open Friends with the name filled in. */
 const linking: LinkingOptions<TabParams> = {
@@ -66,10 +73,12 @@ const icon = (name: IconName, big = false) => {
 /** Three tabs. The camera sits in the middle and is where the app opens. */
 export const AppNavigator = () => {
   const { inbox, requests } = useSnaps();
+  useScheme();
+  const startOnProfile = takeResume();
   return (
-    <NavigationContainer theme={theme} linking={linking}>
+    <NavigationContainer theme={navTheme()} linking={linking}>
       <Tabs.Navigator
-        initialRouteName="Camera"
+        initialRouteName={startOnProfile ? 'ProfileTab' : 'Camera'}
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: colors.ink,
@@ -85,7 +94,9 @@ export const AppNavigator = () => {
           options={{ title: 'Feed', tabBarIcon: icon('mailbox'), tabBarBadge: inbox.length || undefined }}
         />
         <Tabs.Screen name="Camera" component={CameraScreen} options={{ title: 'Camera', tabBarIcon: icon('camera', true) }} />
-        <Tabs.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile', tabBarIcon: icon('bearHat'), tabBarBadge: requests || undefined }} />
+        <Tabs.Screen name="ProfileTab" options={{ title: 'Profile', tabBarIcon: icon('bearTophat'), tabBarBadge: requests || undefined }}>
+          {() => <ProfileStack startOnSettings={startOnProfile} />}
+        </Tabs.Screen>
       </Tabs.Navigator>
     </NavigationContainer>
   );

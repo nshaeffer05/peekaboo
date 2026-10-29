@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Share, StyleSheet, View } from 'react-native';
+import { Share, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { Avatar } from '../components/Avatar';
 import { Logo } from '../components/Logo';
 import { Body, Button, Card, Heading, Screen, Small } from '../components/ui';
 import { api } from '../lib/api';
 import { addLink } from '../lib/links';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 
 /** Your QR code. A friend scans it from their Friends screen and you get a request. */
 export const MyCodeScreen = () => {
@@ -48,7 +48,7 @@ export const MyCodeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, flex: 1 },
   card: { alignItems: 'center', paddingVertical: space.xl, backgroundColor: colors.card, borderWidth: 3, borderColor: colors.butter },
   qrWrap: { padding: 12, backgroundColor: colors.card, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: colors.card,
   },
   who: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: space.md },
-});
+}));

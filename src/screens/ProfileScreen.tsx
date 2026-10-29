@@ -1,13 +1,13 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useCallback, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
 import { Logo } from '../components/Logo';
 import { Body, Card, Screen, Small, Title } from '../components/ui';
 import { api } from '../lib/api';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { Profile } from '../lib/types';
 import type { ProfileStackParams } from '../navigation/types';
 
@@ -66,7 +66,7 @@ const Row = ({
   </Pressable>
 );
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingBottom: 64, gap: 10 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: space.sm },
   hero: { alignItems: 'center', paddingVertical: space.lg, marginBottom: space.sm },
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
   iconWrap: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.butter, alignItems: 'center', justifyContent: 'center' },
   badge: { minWidth: 24, height: 24, borderRadius: 12, paddingHorizontal: 7, backgroundColor: colors.butter, alignItems: 'center', justifyContent: 'center' },
-});
+}));

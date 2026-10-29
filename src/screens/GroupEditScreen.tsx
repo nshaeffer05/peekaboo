@@ -1,13 +1,13 @@
 import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native';
 import { Avatar } from '../components/Avatar';
 import { Field } from '../components/Field';
 import { Icon } from '../components/Icon';
 import { Body, Button, Heading, Screen, Small } from '../components/ui';
 import { api } from '../lib/api';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { FriendRow } from '../lib/types';
 import type { ProfileStackParams } from '../navigation/types';
 
@@ -72,14 +72,14 @@ export const GroupEditScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingBottom: 64 },
   label: { textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 },
   row: {
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card,
     borderRadius: radius.md, padding: 10, borderWidth: 2, borderColor: colors.line,
   },
-  rowOn: { borderColor: colors.butterDeep, backgroundColor: '#FBF5DC' },
+  rowOn: { borderColor: colors.butterDeep, backgroundColor: colors.butterSoft },
   tick: { width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: colors.line, alignItems: 'center', justifyContent: 'center' },
   tickOn: { backgroundColor: colors.butter, borderColor: colors.butterDeep },
-});
+}));

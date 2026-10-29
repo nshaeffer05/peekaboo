@@ -5,7 +5,7 @@ import { colors } from '../lib/theme';
 
 export type IconName =
   | 'face' | 'camera' | 'inbox' | 'people' | 'gear' | 'check' | 'x' | 'chevron'
-  | 'flip' | 'bolt' | 'boltOff' | 'send' | 'flag' | 'eye' | 'puff' | 'plus' | 'stack' | 'mailbox' | 'bearHat';
+  | 'flip' | 'bolt' | 'boltOff' | 'send' | 'flag' | 'eye' | 'puff' | 'plus' | 'stack' | 'mailbox' | 'bearHat' | 'bearTophat';
 
 const GLYPHS: Record<IconName, React.ReactNode> = {
   face: (
@@ -91,6 +91,18 @@ const GLYPHS: Record<IconName, React.ReactNode> = {
       <Path d="M8 6.5c-2.4.1-4.2 2.1-4.3 4.7M12.6 16.4V11c0-2.6-1.9-4.5-4.4-4.5" />
       <Path d="M16.8 6.5V2.8h3.4v2.7h-3.3" />
       <Path d="M9.2 16.6v4.6M6.6 21.3h5.2" />
+    </>
+  ),
+  // The Peekaboo bear from the side, top hat on, looking at you.
+  bearTophat: (
+    <>
+      <Path d="M12.3 10.8c3.4-1.5 7.2-1.1 9 1.1 1.6 1.9 1.3 4.9-.7 6.2-2.2 1.4-5.6 1.7-8.2.9" />
+      <Path d="M15.2 19.1v2.2M18.6 18.7v2.6M21.4 17.2v3.3" />
+      <Path d="M2.3 14.3a5.3 5.3 0 1110.6 0 5.3 5.3 0 01-10.6 0z" />
+      <Path d="M4.7 9.3V4.8h5.8v4.5" />
+      <Path d="M2.6 9.5h10" />
+      <Path d="M5.7 13.7v.2M9.5 13.7v.2" />
+      <Path d="M7.6 15.4c-.7 0-1.2.3-1.2.6s.5.6 1.2.6 1.2-.3 1.2-.6-.5-.6-1.2-.6zM7.6 16.6v.8" />
     </>
   ),
   // Polar bear in an ushanka: fur hat with ear flaps down, round face below.

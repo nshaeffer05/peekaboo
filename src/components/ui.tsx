@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  ActivityIndicator, Pressable, StyleSheet, Text, type TextStyle, View, type ViewStyle,
+  ActivityIndicator, Pressable, Text, type TextStyle, View, type ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, radius, shadow, space, type } from '../lib/theme';
+import { colors, radius, shadow, space, themed, type } from '../lib/theme';
 
 export const Screen = ({ children, style }: { children: React.ReactNode; style?: ViewStyle }) => (
   <SafeAreaView style={[styles.screen, style]} edges={['top', 'left', 'right']}>
@@ -96,7 +96,7 @@ export const inputStyle = {
   borderColor: colors.line,
 } as const;
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   screen: { flex: 1, backgroundColor: colors.paper },
   button: {
     paddingVertical: 16,
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
   pill: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: radius.pill, alignSelf: 'flex-start' },
   pillText: { fontSize: 12, fontWeight: '800', color: colors.ink },
   centered: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: space.lg },
-});
+}));

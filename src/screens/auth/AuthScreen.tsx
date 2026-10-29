@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View,
+  KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, Text, View,
 } from 'react-native';
 import { Field } from '../../components/Field';
 import { Logo } from '../../components/Logo';
@@ -9,7 +9,7 @@ import { api } from '../../lib/api';
 import { PASSWORD_RULE, useAuth, validPassword, validUsername } from '../../lib/auth';
 import { PRIVACY_URL, TERMS_URL } from '../../lib/links';
 import { ResetScreen } from './ResetScreen';
-import { colors, space, type } from '../../lib/theme';
+import { colors, space, themed, type } from '../../lib/theme';
 
 export const AuthScreen = () => {
   const { signIn, signUp } = useAuth();
@@ -124,7 +124,7 @@ export const AuthScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingTop: 64, gap: 12 },
   tabs: { flexDirection: 'row', gap: 8, marginBottom: space.sm },
   agree: { flexDirection: 'row', gap: 10, alignItems: 'center', marginVertical: 4 },
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
   boxOn: { backgroundColor: colors.butter, borderColor: colors.butterDeep },
   tick: { color: colors.ink, fontWeight: '900' },
   link: { color: colors.blueJean, fontWeight: '800' },
-});
+}));

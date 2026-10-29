@@ -15,7 +15,7 @@ import { api, BUCKET } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useSnaps } from '../lib/snaps';
 import { supabase } from '../lib/supabase';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { FriendRow, Group } from '../lib/types';
 
 const uuid = () =>
@@ -146,7 +146,8 @@ export const CameraScreen = () => {
             onMove={setCaptionY}
             height={H}
             editing={editing}
-            onBlur={stopEditing}
+            onEdit={() => setEditing(true)}
+            onDone={stopEditing}
             parkY={insets.top + 72}
           />
         )}
@@ -288,7 +289,7 @@ const Picker = ({
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   black: { flex: 1, backgroundColor: colors.black },
   topBar: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', justifyContent: 'space-between' },
   bottomBar: { position: 'absolute', left: 0, right: 0, alignItems: 'center' },
@@ -322,7 +323,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card,
     borderRadius: radius.md, padding: 10, borderWidth: 2, borderColor: colors.line,
   },
-  friendOn: { borderColor: colors.butterDeep, backgroundColor: '#FBF5DC' },
+  friendOn: { borderColor: colors.butterDeep, backgroundColor: colors.butterSoft },
   chip: {
     flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 8,
     borderRadius: radius.pill, backgroundColor: colors.card, borderWidth: 2, borderColor: colors.line,
@@ -331,4 +332,4 @@ const styles = StyleSheet.create({
   chipText: { fontWeight: '800', color: colors.ink, fontSize: 13 },
   tick: { width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: colors.line, alignItems: 'center', justifyContent: 'center' },
   tickOn: { backgroundColor: colors.butter, borderColor: colors.butterDeep },
-});
+}));

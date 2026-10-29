@@ -1,13 +1,15 @@
 import Constants from 'expo-constants';
 import React, { useEffect, useState } from 'react';
-import { Alert, Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import { Field } from '../components/Field';
+import { Icon } from '../components/Icon';
+import { remountOnSettings } from '../navigation';
 import { Body, Button, Card, Heading, Screen, Small } from '../components/ui';
 import { api } from '../lib/api';
 import { PASSWORD_RULE, useAuth, validPassword } from '../lib/auth';
 import { PRIVACY_URL, SUPPORT_EMAIL, SUPPORT_URL, TERMS_URL } from '../lib/links';
 import { enablePush, permissionState, type PermissionState } from '../lib/notifications';
-import { colors, space } from '../lib/theme';
+import { applyScheme, colors, SCHEME_NAMES, SCHEMES, schemeName, space, themed, type SchemeName } from '../lib/theme';
 
 export const SettingsScreen = () => {
   const { signOut, changePassword } = useAuth();
@@ -54,6 +56,14 @@ export const SettingsScreen = () => {
         </Card>
 
         <Card style={{ gap: 8 }}>
+          <Body style={{ fontWeight: '800' }}>Colour scheme</Body>
+          <Small>All Comfort Colors. Pick the one you like; it sticks.</Small>
+          <View style={styles.swatches}>
+            {SCHEME_NAMES.map((name) => <Swatch key={name} name={name} current={schemeName()} />)}
+          </View>
+        </Card>
+
+        <Card style={{ gap: 8 }}>
           <Body style={{ fontWeight: '800' }}>Change password</Body>
           <Field placeholder="new password" secureTextEntry textContentType="password" value={newPassword} onChangeText={setNewPassword} />
           <Button title="Save" small onPress={savePassword} loading={busy} disabled={!newPassword} />
@@ -87,8 +97,30 @@ export const SettingsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+/** A little swatch: paper disc with the brand colour inside, ticked when active. */
+const Swatch = ({ name, current }: { name: SchemeName; current: SchemeName }) => {
+  const s = SCHEMES[name];
+  const on = name === current;
+  return (
+    <Pressable
+      onPress={() => { if (!on) { remountOnSettings(); applyScheme(name); } }}
+      style={({ pressed }) => [styles.swatch, on && styles.swatchOn, pressed && { opacity: 0.8 }]}
+    >
+      <View style={[styles.disc, { backgroundColor: s.paper, borderColor: s.line }]}>
+        <View style={[styles.dot, { backgroundColor: s.butter }]}>{on && <Icon name="check" size={14} color={s.ink} strokeWidth={3} />}</View>
+      </View>
+      <Small style={{ color: colors.ink }}>{s.label}</Small>
+    </Pressable>
+  );
+};
+
+const styles = themed((colors) => ({
+  swatches: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 4 },
+  swatch: { alignItems: 'center', gap: 4, padding: 6, borderRadius: 12, borderWidth: 2, borderColor: 'transparent' },
+  swatchOn: { borderColor: colors.butterDeep, backgroundColor: colors.butterSoft },
+  disc: { width: 44, height: 44, borderRadius: 22, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
+  dot: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
   wrap: { padding: space.lg, gap: space.md, paddingBottom: 64 },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   link: { color: colors.blueJean, fontWeight: '800', fontSize: 15, paddingVertical: 4 },
-});
+}));

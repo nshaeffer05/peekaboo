@@ -1,13 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import React, { useRef, useState } from 'react';
-import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, RefreshControl, ScrollView, View } from 'react-native';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
 import { Logo } from '../components/Logo';
 import { Body, Button, Screen, Small, Title } from '../components/ui';
 import { timeAgo, timeLeft, useSnaps } from '../lib/snaps';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { InboxSnap } from '../lib/types';
 import type { TabParams } from '../navigation/types';
 import { type Origin, SnapViewer } from './SnapViewer';
@@ -88,7 +88,7 @@ export const FeedScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingBottom: 64, gap: 8 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: space.sm },
   empty: { alignItems: 'center', padding: space.lg, backgroundColor: colors.card, borderRadius: radius.lg, borderWidth: 2, borderColor: colors.line },
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card,
     borderRadius: radius.md, padding: 12, borderWidth: 2, borderColor: colors.line,
   },
-  rowNew: { borderColor: colors.butterDeep, backgroundColor: '#FBF5DC' },
+  rowNew: { borderColor: colors.butterDeep, backgroundColor: colors.butterSoft },
   badge: { width: 36, height: 36, borderRadius: 18, backgroundColor: colors.butter, alignItems: 'center', justifyContent: 'center' },
   dot: { width: 10, height: 10, borderRadius: 5 },
   label: { textTransform: 'uppercase', letterSpacing: 1 },
-});
+}));

@@ -1,12 +1,12 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useCallback, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
 import { Body, Button, Heading, Screen, Small } from '../components/ui';
 import { api } from '../lib/api';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { Group } from '../lib/types';
 import type { ProfileStackParams } from '../navigation/types';
 
@@ -47,7 +47,7 @@ export const GroupsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingBottom: 64 },
   row: {
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card,
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
   stack: { flexDirection: 'row', alignItems: 'center', minWidth: 32 },
   emptyAvatar: { width: 32, height: 32, borderRadius: 16, backgroundColor: colors.line, alignItems: 'center', justifyContent: 'center' },
-});
+}));

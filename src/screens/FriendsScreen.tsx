@@ -2,7 +2,7 @@ import { useFocusEffect, useNavigation, useRoute, type RouteProp } from '@react-
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as Haptics from 'expo-haptics';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, Animated, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Animated, Pressable, ScrollView, View } from 'react-native';
 import { Avatar } from '../components/Avatar';
 import { Field } from '../components/Field';
 import { Icon, type IconName } from '../components/Icon';
@@ -10,7 +10,7 @@ import { Body, Button, Heading, Screen, Small } from '../components/ui';
 import { api } from '../lib/api';
 import { parseAddLink } from '../lib/links';
 import { useSnaps } from '../lib/snaps';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { FriendRow, SearchRow } from '../lib/types';
 import type { ProfileStackParams } from '../navigation/types';
 
@@ -225,7 +225,7 @@ const Row = ({ username, highlight, children }: { username: string; highlight?: 
   </View>
 );
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { padding: space.lg, paddingBottom: 64 },
   actions: { flexDirection: 'row', gap: 10, marginBottom: space.md },
   action: {
@@ -239,9 +239,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card,
     borderRadius: radius.md, padding: 12, borderWidth: 2, borderColor: colors.line,
   },
-  rowHi: { borderColor: colors.butterDeep, backgroundColor: '#FBF5DC' },
+  rowHi: { borderColor: colors.butterDeep, backgroundColor: colors.butterSoft },
   notice: {
     position: 'absolute', left: 16, right: 16, bottom: 24, flexDirection: 'row', gap: 10, alignItems: 'center',
     paddingHorizontal: 16, paddingVertical: 12, borderRadius: radius.md,
   },
-});
+}));

@@ -10,7 +10,7 @@ import { Icon } from '../components/Icon';
 import { Body, Button, Centered, Heading, Small } from '../components/ui';
 import { api } from '../lib/api';
 import { parseAddLink } from '../lib/links';
-import { colors, radius, space } from '../lib/theme';
+import { colors, radius, space, themed } from '../lib/theme';
 import type { ProfileStackParams } from '../navigation/types';
 import type { Relation, SearchRow } from '../lib/types';
 
@@ -132,7 +132,7 @@ const label = (r: Relation) =>
   : r === 'self' ? 'That is your own code'
   : 'Not friends yet';
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   black: { flex: 1, backgroundColor: colors.black },
   frameWrap: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center', gap: space.md },
   frame: { width: 240, height: 240, borderRadius: radius.lg, borderWidth: 4, borderColor: colors.butter },
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
     position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: colors.paper,
     borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg, padding: space.lg,
   },
-});
+}));

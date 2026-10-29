@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, type TextInputProps, View } from 'react-native';
-import { colors, radius } from '../lib/theme';
+import { Pressable, Text, TextInput, type TextInputProps, View } from 'react-native';
+import { colors, radius, themed } from '../lib/theme';
 
 interface Props extends TextInputProps {
   label?: string;
@@ -40,7 +40,7 @@ export const Field = forwardRef<TextInput, Props>(({ label, hint, hintColor, rig
 });
 Field.displayName = 'Field';
 
-const styles = StyleSheet.create({
+const styles = themed((colors) => ({
   wrap: { gap: 6 },
   label: { fontSize: 12, fontWeight: '800', color: colors.inkSoft, textTransform: 'uppercase', letterSpacing: 1, marginLeft: 4 },
   box: {
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   input: { flex: 1, fontSize: 16, fontWeight: '500', color: colors.ink, paddingVertical: 14, paddingRight: 14, minHeight: 50 },
   right: { paddingRight: 14, paddingLeft: 4, justifyContent: 'center' },
   hint: { fontSize: 12, fontWeight: '600', color: colors.inkSoft, marginLeft: 4 },
-});
+}));

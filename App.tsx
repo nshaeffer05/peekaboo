@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider, useAuth } from './src/lib/auth';
 import { enablePush } from './src/lib/notifications';
 import { SnapsProvider } from './src/lib/snaps';
-import { colors } from './src/lib/theme';
+import { colors, loadScheme, useScheme } from './src/lib/theme';
 import { AppNavigator } from './src/navigation';
 import { AuthScreen } from './src/screens/auth/AuthScreen';
 
@@ -28,11 +28,16 @@ const Gate = () => {
 };
 
 export default function App() {
+  const [ready, setReady] = useState(false);
+  const [, version] = useScheme();
+  useEffect(() => { loadScheme().finally(() => setReady(true)); }, []);
+  if (!ready) return null;
   return (
     <SafeAreaProvider>
       <AuthProvider>
-        <StatusBar style="dark" />
-        <Gate />
+        <StatusBar style={colors.dark ? 'light' : 'dark'} />
+        {/* Keyed on the scheme version: a colour change rebuilds every sheet from the root. */}
+        <Gate key={version} />
       </AuthProvider>
     </SafeAreaProvider>
   );
