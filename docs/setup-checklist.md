@@ -38,3 +38,16 @@ cd ~/Desktop/peekaboo
 npx eas-cli build --platform ios --profile production
 ```
 Interactive (Apple sign-in). First build creates the App Store Connect record. See `docs/app-review.md` for the listing answers.
+
+## 6. Local builds (Xcode)
+System Ruby cannot build CocoaPods against the Xcode 27 SDK, so install Homebrew first (asks for your password), then:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install cocoapods
+cd ~/Desktop/peekaboo && npx expo run:ios        # builds, installs on the simulator, starts Metro
+open ios/Peekaboo.xcworkspace                    # to work in Xcode itself (after the first pod install)
+```
+`ios/` is generated and gitignored; never edit it by hand, change `app.json` and re-run prebuild.
+
+## 7. TestFlight for friends and family
+Group "Friends and family" exists with build 6 in it. Finish the Test Information sheet (phone number, review-account password), press Next, then Submit for Beta App Review. After approval, open the group → Testers → enable Public Link and send that link to people. The Account Holder must also accept the updated Developer Program License Agreement (banner on the Apps page) or the submission is refused.

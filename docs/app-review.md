@@ -17,6 +17,6 @@
 
 **Camera usage string.** "Peekaboo uses the camera to take the photo you are about to send."
 
-**Demo account.** Create two accounts and friend them so the reviewer can send a photo to themselves on a second device, or note that they can test with a single device by sending to a friend account and signing in as that account.
+**Demo account.** Review sign-in is `applereview@ayoquotethat.com` (create it in the app or in Supabase Auth → Users with auto-confirm; password known only to Nick). Friend it with a second account so the reviewer can send a photo and open one.
 
 **Screenshots blocked.** expo-screen-capture prevents screenshots and recordings while a photo is on screen (iOS 13+).
