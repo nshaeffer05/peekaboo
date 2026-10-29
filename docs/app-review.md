@@ -20,3 +20,8 @@
 **Demo account.** Review sign-in is `applereview@ayoquotethat.com` (create it in the app or in Supabase Auth → Users with auto-confirm; password known only to Nick). Friend it with a second account so the reviewer can send a photo and open one.
 
 **Screenshots blocked.** expo-screen-capture prevents screenshots and recordings while a photo is on screen (iOS 13+).
+
+## Accounts (created 2026-10-29)
+
+- Review account `applereview@ayoquotethat.com`, username `applereview`. Its password is the one entered under TestFlight > Test Information > Sign-In Information.
+- Helper friend `reviewbuddy@ayoquotethat.com`, username `peekaboobear`; password is noted in the local `.env.local`. Already accepted as a friend of the review account so reviewers have someone to send to.
