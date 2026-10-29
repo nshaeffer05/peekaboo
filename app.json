@@ -58,7 +58,8 @@
         {
           "color": "#F2DF93"
         }
-      ]
+      ],
+      "./plugins/withSceneLifecycle.js"
     ],
     "primaryColor": "#F2DF93",
     "owner": "nshaeffer05",
