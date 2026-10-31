@@ -51,3 +51,15 @@ open ios/Peekaboo.xcworkspace                    # to work in Xcode itself (afte
 
 ## 7. TestFlight for friends and family
 Group "Friends and family" exists with build 6 in it. Finish the Test Information sheet (phone number, review-account password), press Next, then Submit for Beta App Review. After approval, open the group → Testers → enable Public Link and send that link to people. The Account Holder must also accept the updated Developer Program License Agreement (banner on the Apps page) or the submission is refused.
+
+## 8. Local release builds (preferred from 2026-10-31)
+
+EAS cloud builds are limited on the free plan; build on the Mac instead.
+
+```bash
+cd ~/Desktop/peekaboo && source .env.local
+npx eas-cli build --platform ios --profile production --local --output build/peekaboo.ipa
+npx eas-cli submit --platform ios --profile production --path build/peekaboo.ipa
+```
+
+The first command uses the signing credentials EAS already holds, needs Homebrew CocoaPods and fastlane on PATH, and bumps `ios.buildNumber` in app.json (commit it). The second uploads to App Store Connect; processing takes 5-10 minutes, then add the build to the TestFlight group. JS-only changes can instead ship instantly with `npx eas-cli update --channel production --environment production --message "..."`.
