@@ -10,7 +10,7 @@
     "backgroundColor": "#F3EEE3",
     "ios": {
       "bundleIdentifier": "com.shaeffer.peekaboo",
-      "buildNumber": "7",
+      "buildNumber": "8",
       "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
